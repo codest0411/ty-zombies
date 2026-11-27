@@ -25,8 +25,31 @@
 
 ---
 
-## Upcoming (v5.0 Ideas)
-- Local 2-player / LAN split-barricade co-op mode
-- Exportable replay timelines & in-terminal replay viewer
-- Additional themed campaigns & boss mechanics
-- Interactive custom-pack selector in Options
+## Planned Milestones
+
+### v5.0.0 — Replay System, Pack Browser & New Hazards
+- **Interactive Custom Pack Selector:** Browse and toggle `~/.tyzombie/packs/*.txt` directly inside Options without editing config files
+- **Keystroke Replay & Ghost Racing:** Record timestamped run timelines (`~/.tyzombie/replays/`) and race your personal-best ghost in real time
+- **New Zombie Archetypes & Hazards:**
+  - *Shielded `[#]`*: Requires two quick words or a power-up to crack
+  - *Splitter `[%]`*: Splits into two fast mini-words when defeated unless killed during Combo Fever
+  - *EMP Storm Event*: Temporarily scrambles lane positions and rewards rapid target switching
+- **Exportable HTML/SVG Run Reports:** Generate shareable visual match summaries via `tyzombie --export`
+
+### v6.0.0 — Multiplayer Co-Op & Versus Arena
+- **Local Split-Barricade Co-Op:** Two-player local/LAN defense sharing a combined barricade with lane handoffs
+- **LAN / Socket Versus Mode:** Send defeated words/sentences as bonus zombies into your opponent's lanes
+- **Deterministic Tournament Brackets:** Seeded best-of-3 sprint rulesets with standardized mutator presets
+
+### v7.0.0 — Adaptive AI Director & Plugin Ecosystem
+- **Adaptive Weakness Trainer:** Tracks per-character and bigram typo rates to dynamically bias spawned words toward keys you miss most
+- **Campaign Act II ("Quarantine Zero"):** 8 new stages with multi-phase Boss encounters, environmental hazards, and branching route choices
+- **Community Pack Registry & Validator:** `tyzombie pack validate <file>` CLI tool to lint, balance-check, and package community word/sentence packs
+
+### v8.0.0 — Room-Based Asymmetric Co-Op ("Defender vs. Director")
+- **Room Code Lobbies:** Host or join a match with a short room code (`tyzombie --host` / `tyzombie --join <CODE>`) over LAN or lightweight relay
+- **Asymmetric Stress Rounds:**
+  - **Player 1 (Defender):** Types words and sentences to hold the barricade and build combos
+  - **Player 2 (Director):** Spends regenerating Stress Energy to spawn fast Runners, Brutes, Fog, Blood Moons, or long sentences to pressure the Defender
+- **Role-Swap Rounds & Scoring:** Players swap roles every round; whoever survives longer or scores higher as Defender wins the match
+
