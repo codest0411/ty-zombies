@@ -63,6 +63,7 @@ pipx install ty-zombies
 
 ```bash
 pip install ty-zombies
+python -m tyzombie
 ```
 
 > **Windows note**: `windows-curses` is automatically installed on Windows as a platform dependency. If `tyzombie` is not on your `PATH` after installing with `--user`, run `python -m tyzombie setup-shell` to add a PowerShell function or Unix shell alias.
