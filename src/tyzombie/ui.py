@@ -133,12 +133,41 @@ def banner(cv, y, glyphs=None):
     center(cv, y + 1, "T Y - Z O M B I E S   [Z]>>", RED, bold=True)
 
 
-def draw_menu(cv, items, sel, footer="UP/DOWN move   ENTER select   Q quit", sub=None, stats=None):
+def draw_menu(cv, items, sel, footer="UP/DOWN move   ENTER select   Q quit", sub=None, stats=None, ach_count=0):
     h, w = cv.size()
     g = get_glyphs()
     draw_box(cv, 0, 0, h, max(2, w - 1), col=WHITE, outer=True, glyphs=g)
     banner(cv, 1, g)
     center(cv, 4, sub or "They are coming. Every one of them carries a word.", dim=True)
+    wide = w >= 96 and stats is not None and h >= 22
+    if wide and stats is not None:
+        left_w = 48
+        right_x = 52
+        right_w = w - right_x - 3
+        draw_box(cv, 6, 3, h - 9, left_w, title="OPERATIONS", col=CYAN, outer=False, glyphs=g)
+        top = 7
+        max_visible = max(1, h - 11)
+        start_idx = max(0, min(sel - max_visible // 2, len(items) - max_visible))
+        for offset, i in enumerate(range(start_idx, min(len(items), start_idx + max_visible))):
+            text = items[i]
+            row = top + offset
+            if i == sel:
+                cv.put(row, 6, f" {g['arrow']} {text:<24}", YELLOW, bold=True, rev=True)
+            else:
+                cv.put(row, 6, f"   {text:<24}", WHITE)
+        draw_box(cv, 6, right_x, h - 9, right_w, title="FIELD STATUS", col=GREEN, outer=False, glyphs=g)
+        cv.put(8, right_x + 2, f"Best WPM     : {stats.get('best_wpm', 0)}", GREEN, bold=True)
+        cv.put(9, right_x + 2, f"Total Kills  : {stats.get('total_kills', 0)}", WHITE)
+        cv.put(10, right_x + 2, f"Best Combo   : x{stats.get('best_combo', 0)}", YELLOW)
+        cv.put(11, right_x + 2, f"Bosses Slain : {stats.get('bosses_slain', 0)}", RED)
+        cv.put(12, right_x + 2, f"Sentences    : {stats.get('sentences_cleared', 0)}", CYAN)
+        cv.put(13, right_x + 2, f"Best Wave    : {stats.get('best_wave', 0)}", WHITE)
+        cv.put(14, right_x + 2, f"Achievements : {ach_count}/{len(ACHIEVEMENTS)}", MAGENTA)
+        cv.put(16, right_x + 2, "Tip: Try SENTENCE SIEGE or", dim=True)
+        cv.put(17, right_x + 2, "DAILY CHALLENGE for variety!", dim=True)
+        center(cv, h - 2, footer, dim=True)
+        return
+
     if stats:
         stat_line = (
             f"Best WPM: {stats.get('best_wpm', 0)}  {g['bullet']}  "
@@ -262,9 +291,12 @@ def draw_siege(cv, sh, paused=False, reduced_flash=False, large_ui=False):
 
     # Battlefield lanes
     flash = (not reduced_flash) and (sh.t < sh.flash_until)
+    danger_lanes = {z.lane for z in sh.zombies if z.x < 14}
     for lane in range(LANES):
         y = 4 + lane
         cv.put(y, 0, "@", GREEN, bold=True)
+        if lane in danger_lanes:
+            cv.put(y, 1, "!", RED, bold=True)
         cv.put(y, 2, f"{g['v']}#{g['v']}", RED if flash else bcol, bold=True, rev=flash)
         cv.put(y, FX0, " ." * (FIELD_W // 2), dim=True)
 
@@ -292,12 +324,18 @@ def draw_siege(cv, sh, paused=False, reduced_flash=False, large_ui=False):
             cv.put(3, sx + 2, f"WPM {sh.wpm():>3.0f} {wpm_bar}", GREEN)
             cv.put(4, sx + 2, f"ACC {sh.accuracy():>3.0f}%{acc_bar}", CYAN)
             cv.put(5, sx + 2, f"CMB x{sh.combo:<2} {cmb_bar}", YELLOW)
+            prog_bar = progress_bar(min(1.0, sh.kills / max(1, total)), max(4, sw - 11), g)
+            cv.put(6, sx + 2, f"WAV {sh.kills:>2}/{total:<2}{prog_bar}", WHITE)
             cv.put(7, sx + 2, f"PACK: {sh.pack_name}"[: sw - 4], WHITE)
             mut_str = ", ".join(sh.mutators) if sh.mutators else "none"
             cv.put(8, sx + 2, f"MUT: {mut_str}"[: sw - 4], MAGENTA if sh.mutators else WHITE, dim=not sh.mutators)
             if hasattr(sh, "word_streak"):
                 cv.put(9, sx + 2, f"STRK x{sh.word_streak}  PERF {sh.perfect_sentences}"[: sw - 4], GREEN)
-            elif sh.combo >= 10:
+            elif getattr(sh, "pb_wpm", 0) > 0:
+                delta = sh.wpm() - sh.pb_wpm
+                sign = "+" if delta >= 0 else ""
+                cv.put(9, sx + 2, f"PB {sh.pb_wpm:.0f} ({sign}{delta:.0f} WPM)"[: sw - 4], GREEN if delta >= 0 else YELLOW)
+            if sh.combo >= 10:
                 cv.put(10, sx + 2, "FEVER +25% PTS!", YELLOW, bold=True)
             else:
                 cv.put(10, sx + 2, f"FEVER AT x10 ({sh.combo}/10)"[: sw - 4], dim=True)

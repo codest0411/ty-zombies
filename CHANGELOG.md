@@ -5,6 +5,14 @@ All notable changes to **ty-zombies** will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - 2026-11-27
+
+### Added
+- **2-Column Wide Main Menu**: Renders `OPERATIONS` and `FIELD STATUS` panels side by side on `>=96`-column terminals.
+- **Cockpit Visual Upgrades**: Danger-lane `!` barricade warning indicators, live `WAV` progress bar, and Personal-Best WPM Ghost delta (`PB`) in the telemetry sidebar.
+- **Custom Word/Sentence Packs**: `SaveManager.discover_custom_packs()` loads `.txt` packs from `~/.tyzombie/packs/` (or `$TYZOMBIE_DATA_DIR/packs/`).
+- **Updated Screenshots**: Refreshed `assets/` gallery including `assets/sentence.png` for Sentence Siege.
+
 ## [3.0.0] - 2026-11-27
 
 ### Added

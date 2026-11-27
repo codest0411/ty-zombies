@@ -228,6 +228,26 @@ class SaveManager:
         self.data["active_run"] = None
         self.save()
 
+    def discover_custom_packs(self):
+        """Load custom .txt word/sentence packs from `<data_dir>/packs/`."""
+        packs_dir = os.path.join(self.data_dir, "packs")
+        custom = {}
+        if not os.path.isdir(packs_dir):
+            return custom
+        for fname in sorted(os.listdir(packs_dir)):
+            if not fname.lower().endswith(".txt"):
+                continue
+            name = os.path.splitext(fname)[0].upper()[:16]
+            fpath = os.path.join(packs_dir, fname)
+            try:
+                with open(fpath, "r", encoding="utf-8") as f:
+                    lines = [ln.strip().lower() for ln in f if ln.strip() and not ln.strip().startswith("#")]
+                if lines:
+                    custom[name] = lines
+            except OSError:
+                continue
+        return custom
+
     @staticmethod
     def format_run_card(card):
         """Format a shareable ASCII/Markdown run card."""

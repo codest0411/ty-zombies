@@ -109,7 +109,7 @@ def main(argv=None):
     except curses.error as exc:
         print(f"Terminal error: {exc}. Try resizing your terminal to at least 78x20.", file=sys.stderr)
         return 1
-    print("The dead are still out there. See you next time.")
+    print("The dead are still out there. See you next time. Bye! [Yup-45],[codest0411]. ")
     return 0
 
 

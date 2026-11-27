@@ -592,7 +592,7 @@ class App:
                     "HOW TO PLAY",
                     "QUIT",
                 ]
-                sel = self.menu(items, sel, stats=self.data["stats"])
+                sel = self.menu(items, sel, stats=self.data["stats"], ach_count=len(self.data["achievements"]))
                 if sel == -1:
                     return
                 choice = items[sel]

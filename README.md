@@ -41,7 +41,11 @@ A fast, tactical terminal typing survival game with an 8-level Campaign, Endless
 
 <table>
 <tr>
-<td align="center"><b>Main Menu</b><br><img src="assets/menu.png" alt="Main Menu" width="420"></td>
+<td align="center"><b>Main Menu (v4.0)</b><br><img src="assets/menu.png" alt="Main Menu" width="420"></td>
+<td align="center"><b>Wide Telemetry Gameplay</b><br><img src="assets/gameplay.png" alt="Wide Telemetry Gameplay" width="420"></td>
+</tr>
+<tr>
+<td align="center"><b>Sentence Siege</b><br><img src="assets/sentence.png" alt="Sentence Siege" width="420"></td>
 <td align="center"><b>Mission Debrief</b><br><img src="assets/debrief.png" alt="Mission Debrief" width="420"></td>
 </tr>
 <tr>

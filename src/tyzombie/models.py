@@ -234,6 +234,7 @@ class Siege:
         pack_idx = settings.get("pack", 0) % len(PACK_NAMES)
         self.pack_name = PACK_NAMES[pack_idx]
         self.bucket = BUCKETS[self.pack_name]
+        self.pb_wpm = float(settings.get("pb_wpm", 0))
 
         if "pure_typing" in self.mutators:
             self.charges = {p: 0 for p in POWERS}
@@ -271,6 +272,16 @@ class Siege:
         self.hint_until, self.hint_text = -99.0, ""
         self.beep = False
         self.sound_events = []
+
+    def apply_custom_words(self, name, entries):
+        """Load custom words/sentences into this Siege instance."""
+        words = [w for line in entries for w in line.split() if w.isalpha()]
+        if words:
+            b = {}
+            for w in sorted(set(words)):
+                b.setdefault(len(w), []).append(w)
+            self.pack_name = name
+            self.bucket = b
 
     def _emit_sound(self, cue):
         self.sound_events.append(cue)

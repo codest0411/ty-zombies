@@ -66,3 +66,19 @@ def test_achievements_stats_and_active_run(tmp_path):
     card = mgr.format_run_card({"mode": "CAMPAIGN", "where": "Level 1", "diff": "NORMAL", "score": 1234, "wpm": 62.0, "acc": 97.5, "date": "2026-11-27"})
     assert "TY-ZOMBIES RUN CARD" in card
     assert "1234" in card
+
+
+def test_discover_custom_packs(tmp_path):
+    packs_dir = tmp_path / "packs"
+    packs_dir.mkdir()
+    (packs_dir / "scifi.txt").write_text("# comment\nnebula\nstarship\n", encoding="utf-8")
+
+    mgr = SaveManager(data_dir=tmp_path)
+    custom = mgr.discover_custom_packs()
+    assert "SCIFI" in custom
+    assert custom["SCIFI"] == ["nebula", "starship"]
+
+    sh = Siege(LEVELS[0], "LEVEL 1", DEFAULT_SETTINGS, seed=1)
+    sh.apply_custom_words("SCIFI", custom["SCIFI"])
+    assert sh.pack_name == "SCIFI"
+    assert sh.pick_word(6, 8) in ("nebula", "starship")

@@ -138,6 +138,19 @@ def test_ui_screens_render_without_error(tmp_path):
     draw_menu(mcv, ["CAMPAIGN", "SURVIVAL", "SENTENCE SIEGE", "DAILY CHALLENGE", "QUIT"], 2)
     assert "SENTENCE SIEGE" in mcv.full_text()
 
+    # Wide 2-column menu with OPERATIONS & FIELD STATUS
+    wmcv = BufferCanvas(rows=25, cols=100)
+    draw_menu(
+        wmcv,
+        ["CAMPAIGN", "SURVIVAL", "SENTENCE SIEGE", "QUIT"],
+        2,
+        stats={"best_wpm": 80, "total_kills": 200, "best_combo": 20, "bosses_slain": 3, "sentences_cleared": 12, "best_wave": 5},
+        ach_count=4,
+    )
+    wmtext = wmcv.full_text()
+    assert "OPERATIONS" in wmtext
+    assert "FIELD STATUS" in wmtext
+
 
 def test_audio_wav_synthesis_and_engine(tmp_path):
     wav_path = tmp_path / "cue.wav"
