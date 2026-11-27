@@ -147,8 +147,10 @@ twine check dist/*
 
 MIT License — see [LICENSE](LICENSE) for details.
 
-<div align='center'>
-Special Thanks for this Guy --> [Yup-25](https://github.com/yup-45)
+<div align="center">
+
+Special Thanks for this Guy 
+[Yup-45](https://github.com/yup-45)
 
 Thanks Buddy !
 
