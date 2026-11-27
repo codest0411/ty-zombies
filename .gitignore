@@ -1,0 +1,28 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Packaging & distribution
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments & testing
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# User save data & local state
+.tyzombie/
+*.json.tmp
+*.wav
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="572" viewBox="0 0 760 572" font-family="Consolas, Menlo, 'DejaVu Sans Mono', monospace" font-size="15">
+<rect width="760" height="572" rx="12" fill="#0d1117" stroke="#30363d"/>
+<rect width="760" height="34" rx="12" fill="#161b22"/><rect y="22" width="760" height="12" fill="#161b22"/>
+<circle cx="22" cy="17" r="6" fill="#f85149"/><circle cx="42" cy="17" r="6" fill="#d29922"/><circle cx="62" cy="17" r="6" fill="#3fb950"/>
+<text x="380" y="22" text-anchor="middle" fill="#8b949e" font-size="13">python3 zombies.py</text>
+<rect x="20.0" y="50" width="711.0" height="21" fill="#f85149"/>
+<text x="20.0" y="65" fill="#0d1117" textLength="711.0" lengthAdjust="spacing" xml:space="preserve"> TYPING ZOMBIES :: LEVEL 4 THE HOSPITAL                                        </text>
+<text x="20.0" y="86" fill="#c9d1d9" textLength="594.0" lengthAdjust="spacing" xml:space="preserve">SCORE 3288    KILLS 24/25   COMBO x5   WPM  30   ACC  99%   NORMAL</text>
+<text x="20.0" y="107" fill="#e6edf3" textLength="90.0" lengthAdjust="spacing" xml:space="preserve">BARRICADE </text>
+<text x="110.0" y="107" fill="#3fb950" textLength="90.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">[########]</text>
+<text x="209.0" y="107" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve">8/8</text>
+<text x="632.0" y="107" fill="#e6edf3" textLength="81.0" lengthAdjust="spacing" xml:space="preserve">TIME 1:00</text>
+<text x="20.0" y="128" fill="#39c5cf" textLength="117.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">[1] FREEZE x3</text>
+<text x="164.0" y="128" fill="#bc8cff" textLength="99.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">[2] BOMB x1</text>
+<text x="290.0" y="128" fill="#3fb950" textLength="117.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">[3] REPAIR x3</text>
+<text x="434.0" y="128" fill="#d29922" textLength="117.0" lengthAdjust="spacing" xml:space="preserve">[/] ASSIST x3</text>
+<text x="20.0" y="149" fill="#3fb950" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">@</text>
+<text x="38.0" y="149" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">|#|</text>
+<text x="92.0" y="149" fill="#c9d1d9" textLength="594.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</text>
+<text x="20.0" y="170" fill="#3fb950" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">@</text>
+<text x="38.0" y="170" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">|#|</text>
+<text x="92.0" y="170" fill="#c9d1d9" textLength="594.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</text>
+<text x="20.0" y="191" fill="#3fb950" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">@</text>
+<text x="38.0" y="191" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">|#|</text>
+<text x="92.0" y="191" fill="#c9d1d9" textLength="594.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</text>
+<text x="20.0" y="212" fill="#3fb950" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">@</text>
+<text x="38.0" y="212" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">|#|</text>
+<text x="92.0" y="212" fill="#c9d1d9" textLength="594.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</text>
+<text x="20.0" y="233" fill="#3fb950" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">@</text>
+<text x="38.0" y="233" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">|#|</text>
+<text x="92.0" y="233" fill="#c9d1d9" textLength="594.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</text>
+<text x="20.0" y="254" fill="#3fb950" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">@</text>
+<text x="38.0" y="254" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">|#|</text>
+<text x="92.0" y="254" fill="#c9d1d9" textLength="594.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</text>
+<text x="20.0" y="275" fill="#3fb950" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">@</text>
+<text x="38.0" y="275" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">|#|</text>
+<text x="92.0" y="275" fill="#c9d1d9" textLength="594.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</text>
+<text x="20.0" y="296" fill="#3fb950" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">@</text>
+<text x="38.0" y="296" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">|#|</text>
+<text x="92.0" y="296" fill="#c9d1d9" textLength="594.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</text>
+<text x="65.0" y="212" fill="#d29922" textLength="333.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">-------------------------------------</text>
+<text x="407.0" y="212" fill="#f85149" textLength="54.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">[BOSS]</text>
+<text x="470.0" y="212" fill="#3fb950" textLength="117.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">song rain lak</text>
+<rect x="587.0" y="197" width="9.0" height="21" fill="#d29922"/>
+<text x="587.0" y="212" fill="#0d1117" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">e</text>
+<text x="20.0" y="317" fill="#c9d1d9" textLength="711.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6">===============================================================================</text>
+<text x="20.0" y="338" fill="#e6edf3" textLength="63.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">TARGET </text>
+<text x="83.0" y="338" fill="#3fb950" textLength="117.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">song rain lak</text>
+<text x="200.0" y="338" fill="#d29922" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">e</text>
+<text x="236.0" y="338" fill="#c9d1d9" textLength="54.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6">(BOSS)</text>
+<text x="20.0" y="548" fill="#c9d1d9" textLength="702.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6">type words to shoot   TAB switch  BKSP drop  1/2/3 powers  / assist  ESC pause</text>
+</svg>

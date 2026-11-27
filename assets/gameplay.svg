@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="572" viewBox="0 0 760 572" font-family="Consolas, Menlo, 'DejaVu Sans Mono', monospace" font-size="15">
+<rect width="760" height="572" rx="12" fill="#0d1117" stroke="#30363d"/>
+<rect width="760" height="34" rx="12" fill="#161b22"/><rect y="22" width="760" height="12" fill="#161b22"/>
+<circle cx="22" cy="17" r="6" fill="#f85149"/><circle cx="42" cy="17" r="6" fill="#d29922"/><circle cx="62" cy="17" r="6" fill="#3fb950"/>
+<text x="380" y="22" text-anchor="middle" fill="#8b949e" font-size="13">python3 zombies.py</text>
+<rect x="20.0" y="50" width="711.0" height="21" fill="#f85149"/>
+<text x="20.0" y="65" fill="#0d1117" textLength="711.0" lengthAdjust="spacing" xml:space="preserve"> TYPING ZOMBIES :: LEVEL 5 THE SUBWAY                                          </text>
+<text x="20.0" y="86" fill="#c9d1d9" textLength="594.0" lengthAdjust="spacing" xml:space="preserve">SCORE 1327    KILLS 12/32   COMBO x0   WPM  24   ACC  96%   NORMAL</text>
+<text x="20.0" y="107" fill="#e6edf3" textLength="90.0" lengthAdjust="spacing" xml:space="preserve">BARRICADE </text>
+<text x="110.0" y="107" fill="#3fb950" textLength="90.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">[########]</text>
+<text x="209.0" y="107" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve">8/8</text>
+<text x="632.0" y="107" fill="#e6edf3" textLength="81.0" lengthAdjust="spacing" xml:space="preserve">TIME 0:35</text>
+<text x="20.0" y="128" fill="#39c5cf" textLength="117.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">[1] FREEZE x2</text>
+<text x="164.0" y="128" fill="#bc8cff" textLength="99.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">[2] BOMB x2</text>
+<text x="290.0" y="128" fill="#3fb950" textLength="117.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6">[3] REPAIR x0</text>
+<text x="434.0" y="128" fill="#d29922" textLength="117.0" lengthAdjust="spacing" xml:space="preserve">[/] ASSIST x2</text>
+<text x="20.0" y="149" fill="#3fb950" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">@</text>
+<text x="38.0" y="149" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">|#|</text>
+<text x="92.0" y="149" fill="#c9d1d9" textLength="594.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</text>
+<text x="20.0" y="170" fill="#3fb950" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">@</text>
+<text x="38.0" y="170" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">|#|</text>
+<text x="92.0" y="170" fill="#c9d1d9" textLength="594.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</text>
+<text x="20.0" y="191" fill="#3fb950" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">@</text>
+<text x="38.0" y="191" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">|#|</text>
+<text x="92.0" y="191" fill="#c9d1d9" textLength="594.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</text>
+<text x="20.0" y="212" fill="#3fb950" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">@</text>
+<text x="38.0" y="212" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">|#|</text>
+<text x="92.0" y="212" fill="#c9d1d9" textLength="594.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</text>
+<text x="20.0" y="233" fill="#3fb950" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">@</text>
+<text x="38.0" y="233" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">|#|</text>
+<text x="92.0" y="233" fill="#c9d1d9" textLength="594.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</text>
+<text x="20.0" y="254" fill="#3fb950" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">@</text>
+<text x="38.0" y="254" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">|#|</text>
+<text x="92.0" y="254" fill="#c9d1d9" textLength="594.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</text>
+<text x="20.0" y="275" fill="#3fb950" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">@</text>
+<text x="38.0" y="275" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">|#|</text>
+<text x="92.0" y="275" fill="#c9d1d9" textLength="594.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</text>
+<text x="20.0" y="296" fill="#3fb950" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">@</text>
+<text x="38.0" y="296" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">|#|</text>
+<text x="92.0" y="296" fill="#c9d1d9" textLength="594.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</text>
+<text x="668.0" y="191" fill="#58a6ff" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">[*]</text>
+<text x="704.0" y="191" fill="#e6edf3" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">s</text>
+<text x="713.0" y="191" fill="#e6edf3" textLength="18.0" lengthAdjust="spacing" xml:space="preserve">an</text>
+<text x="605.0" y="233" fill="#bc8cff" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">[X]</text>
+<text x="641.0" y="233" fill="#e6edf3" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">g</text>
+<text x="650.0" y="233" fill="#e6edf3" textLength="45.0" lengthAdjust="spacing" xml:space="preserve">arden</text>
+<text x="524.0" y="191" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">[Z]</text>
+<text x="560.0" y="191" fill="#e6edf3" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">w</text>
+<text x="569.0" y="191" fill="#e6edf3" textLength="36.0" lengthAdjust="spacing" xml:space="preserve">ater</text>
+<text x="443.0" y="149" fill="#d29922" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">[R]</text>
+<text x="479.0" y="149" fill="#e6edf3" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">m</text>
+<text x="488.0" y="149" fill="#e6edf3" textLength="27.0" lengthAdjust="spacing" xml:space="preserve">oon</text>
+<text x="416.0" y="296" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">[Z]</text>
+<text x="452.0" y="296" fill="#e6edf3" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">t</text>
+<text x="461.0" y="296" fill="#e6edf3" textLength="54.0" lengthAdjust="spacing" xml:space="preserve">eacher</text>
+<text x="335.0" y="149" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">[Z]</text>
+<text x="371.0" y="149" fill="#e6edf3" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">l</text>
+<text x="380.0" y="149" fill="#e6edf3" textLength="54.0" lengthAdjust="spacing" xml:space="preserve">antern</text>
+<text x="263.0" y="233" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">[Z]</text>
+<text x="299.0" y="233" fill="#e6edf3" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">h</text>
+<text x="308.0" y="233" fill="#e6edf3" textLength="63.0" lengthAdjust="spacing" xml:space="preserve">ospital</text>
+<text x="191.0" y="212" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">[Z]</text>
+<text x="227.0" y="212" fill="#f85149" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">p</text>
+<text x="236.0" y="212" fill="#f85149" textLength="45.0" lengthAdjust="spacing" xml:space="preserve">ocket</text>
+<text x="137.0" y="254" fill="#3fb950" textLength="27.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">[Z]</text>
+<rect x="173.0" y="239" width="9.0" height="21" fill="#d29922"/>
+<text x="173.0" y="254" fill="#0d1117" textLength="9.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">f</text>
+<text x="182.0" y="254" fill="#f85149" textLength="63.0" lengthAdjust="spacing" xml:space="preserve">estival</text>
+<text x="20.0" y="317" fill="#c9d1d9" textLength="711.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6">===============================================================================</text>
+<text x="20.0" y="338" fill="#e6edf3" textLength="63.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">TARGET </text>
+<text x="83.0" y="338" fill="#d29922" textLength="72.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">festival</text>
+<text x="182.0" y="338" fill="#c9d1d9" textLength="72.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6">(Walker)</text>
+<text x="20.0" y="380" fill="#f85149" textLength="45.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">TYPO!</text>
+<text x="20.0" y="401" fill="#d29922" textLength="414.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">ASSIST: locked on the closest zombie: festival</text>
+<text x="20.0" y="548" fill="#c9d1d9" textLength="702.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6">type words to shoot   TAB switch  BKSP drop  1/2/3 powers  / assist  ESC pause</text>
+</svg>

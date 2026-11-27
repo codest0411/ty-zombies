@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="572" viewBox="0 0 760 572" font-family="Consolas, Menlo, 'DejaVu Sans Mono', monospace" font-size="15">
+<rect width="760" height="572" rx="12" fill="#0d1117" stroke="#30363d"/>
+<rect width="760" height="34" rx="12" fill="#161b22"/><rect y="22" width="760" height="12" fill="#161b22"/>
+<circle cx="22" cy="17" r="6" fill="#f85149"/><circle cx="42" cy="17" r="6" fill="#d29922"/><circle cx="62" cy="17" r="6" fill="#3fb950"/>
+<text x="380" y="22" text-anchor="middle" fill="#8b949e" font-size="13">python3 zombies.py</text>
+<text x="317.0" y="86" fill="#f85149" textLength="117.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">O P T I O N S</text>
+<text x="245.0" y="149" fill="#c9d1d9" textLength="270.0" lengthAdjust="spacing" xml:space="preserve">DIFFICULTY      &lt;   NORMAL   &gt;</text>
+<rect x="245.0" y="176" width="270.0" height="21" fill="#d29922"/>
+<text x="245.0" y="191" fill="#0d1117" textLength="270.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">WORD PACK       &lt;   CODER    &gt;</text>
+<text x="245.0" y="233" fill="#c9d1d9" textLength="270.0" lengthAdjust="spacing" xml:space="preserve">ASSIST HINTS    &lt;     ON     &gt;</text>
+<text x="245.0" y="275" fill="#c9d1d9" textLength="270.0" lengthAdjust="spacing" xml:space="preserve">TYPO JAM        &lt;    OFF     &gt;</text>
+<text x="245.0" y="317" fill="#c9d1d9" textLength="270.0" lengthAdjust="spacing" xml:space="preserve">SOUND           &lt;     ON     &gt;</text>
+<text x="101.0" y="380" fill="#c9d1d9" textLength="558.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6">Which words the zombies carry. CODER is great for programmers.</text>
+<text x="182.0" y="527" fill="#c9d1d9" textLength="387.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6">UP/DOWN pick    LEFT/RIGHT change    Q back</text>
+</svg>

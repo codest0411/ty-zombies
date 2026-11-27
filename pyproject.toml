@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ty-zombies"
+version = "1.0.0"
+description = "A fast, tactical terminal typing survival game with campaign levels, bosses, mutators, daily challenges, and endless waves."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+authors = [
+    {name = "codest0411"}
+]
+keywords = ["terminal", "game", "typing", "zombies", "curses", "cli", "arcade"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console :: Curses",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Games/Entertainment :: Arcade",
+]
+dependencies = [
+    "windows-curses>=2.3.0; sys_platform == 'win32'",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "build>=1.0",
+    "twine>=4.0",
+]
+
+[project.scripts]
+tyzombie = "tyzombie.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/codest0411/ty-zombies"
+Repository = "https://github.com/codest0411/ty-zombies"
+Issues = "https://github.com/codest0411/ty-zombies/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.pyrefly]
+search-path = ["src"]

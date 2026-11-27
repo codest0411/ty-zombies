@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="572" viewBox="0 0 760 572" font-family="Consolas, Menlo, 'DejaVu Sans Mono', monospace" font-size="15">
+<rect width="760" height="572" rx="12" fill="#0d1117" stroke="#30363d"/>
+<rect width="760" height="34" rx="12" fill="#161b22"/><rect y="22" width="760" height="12" fill="#161b22"/>
+<circle cx="22" cy="17" r="6" fill="#f85149"/><circle cx="42" cy="17" r="6" fill="#d29922"/><circle cx="62" cy="17" r="6" fill="#3fb950"/>
+<text x="380" y="22" text-anchor="middle" fill="#8b949e" font-size="13">python3 zombies.py</text>
+<text x="173.0" y="86" fill="#f85149" textLength="405.0" lengthAdjust="spacing" xml:space="preserve">+-------------------------------------------+</text>
+<text x="173.0" y="107" fill="#f85149" textLength="405.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">|   T Y P I N G     Z O M B I E S    [Z]&gt;&gt;  |</text>
+<text x="173.0" y="128" fill="#f85149" textLength="405.0" lengthAdjust="spacing" xml:space="preserve">+-------------------------------------------+</text>
+<text x="146.0" y="170" fill="#c9d1d9" textLength="468.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6">They are coming. They are carrying words. Type fast.</text>
+<text x="200.0" y="191" fill="#3fb950" textLength="360.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6">[Z] brains    [R] run    [B] unstoppable</text>
+<rect x="326.0" y="218" width="108.0" height="21" fill="#d29922"/>
+<text x="326.0" y="233" fill="#0d1117" textLength="108.0" lengthAdjust="spacing" xml:space="preserve" font-weight="bold">&gt; CAMPAIGN &lt;</text>
+<text x="326.0" y="275" fill="#c9d1d9" textLength="108.0" lengthAdjust="spacing" xml:space="preserve">  SURVIVAL  </text>
+<text x="308.0" y="317" fill="#c9d1d9" textLength="144.0" lengthAdjust="spacing" xml:space="preserve">  LEVEL SELECT  </text>
+<text x="308.0" y="359" fill="#c9d1d9" textLength="135.0" lengthAdjust="spacing" xml:space="preserve">  HOW TO PLAY  </text>
+<text x="326.0" y="401" fill="#c9d1d9" textLength="99.0" lengthAdjust="spacing" xml:space="preserve">  OPTIONS  </text>
+<text x="308.0" y="443" fill="#c9d1d9" textLength="135.0" lengthAdjust="spacing" xml:space="preserve">  HIGH SCORES  </text>
+<text x="344.0" y="485" fill="#c9d1d9" textLength="72.0" lengthAdjust="spacing" xml:space="preserve">  QUIT  </text>
+<text x="209.0" y="548" fill="#c9d1d9" textLength="342.0" lengthAdjust="spacing" xml:space="preserve" opacity="0.6">UP/DOWN move    ENTER select    Q quit</text>
+</svg>
