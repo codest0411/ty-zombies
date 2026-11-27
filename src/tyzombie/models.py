@@ -19,8 +19,9 @@ KINDS = {
     "B": {"label": "Brute",  "speed": 0.7,  "dmg": 2, "mult": 2.0,  "sprite": "[B]",    "col": RED},
     "M": {"label": "Medic",  "speed": 1.0,  "dmg": 1, "mult": 1.5,  "sprite": "[+]",    "col": CYAN},
     "F": {"label": "Frost",  "speed": 1.2,  "dmg": 1, "mult": 1.5,  "sprite": "[*]",    "col": BLUE},
-    "X": {"label": "Bomber", "speed": 1.0,  "dmg": 1, "mult": 1.5,  "sprite": "[X]",    "col": MAGENTA},
-    "K": {"label": "BOSS",   "speed": 0.45, "dmg": 6, "mult": 10.0, "sprite": "[BOSS]", "col": RED},
+    "X": {"label": "Bomber",   "speed": 1.0,  "dmg": 1, "mult": 1.5,  "sprite": "[X]",    "col": MAGENTA},
+    "S": {"label": "Sentence", "speed": 0.38, "dmg": 2, "mult": 3.0,  "sprite": "[S]",    "col": CYAN},
+    "K": {"label": "BOSS",     "speed": 0.45, "dmg": 6, "mult": 10.0, "sprite": "[BOSS]", "col": RED},
 }
 
 KIND_NOTE = {
@@ -30,6 +31,7 @@ KIND_NOTE = {
     "M": "drops a REPAIR charge",
     "F": "drops a FREEZE charge",
     "X": "drops a BOMB charge",
+    "S": "carries a full sentence",
     "K": "type a whole sentence",
 }
 DROPS = {"M": "repair", "F": "freeze", "X": "bomb"}
@@ -650,3 +652,202 @@ class Siege:
         self.zombies = [Zombie.from_dict(z) for z in raw.get("zombies", [])]
         t_idx = raw.get("target_idx")
         self.target = self.zombies[t_idx] if isinstance(t_idx, int) and 0 <= t_idx < len(self.zombies) else None
+
+
+SENTENCES = {
+    "EVERYDAY": [
+        "hold the wooden barricade before the dead break through",
+        "every keystroke pushes the restless horde back into the dark",
+        "keep your eyes on the closest lane and never panic",
+        "quick fingers and steady breathing will save the city tonight",
+        "the morning train arrives late while storm clouds gather overhead",
+        "fresh coffee on the kitchen table cools beside an open notebook",
+        "silver lanterns swing gently along the quiet harbor boardwalk",
+        "we packed warm blankets and flashlights for the long mountain journey",
+        "accurate typing beats frantic speed when the pressure rises fast",
+        "count the seconds between each wave and prepare your next target",
+        "the radio crackles with static as dawn breaks over the river",
+        "bright fireworks echoed across the crowded town square at midnight",
+    ],
+    "HORROR": [
+        "shadows creep across the abandoned subway platform in total silence",
+        "something scratches violently against the reinforced iron cellar door",
+        "a blood moon rises high above the crooked graveyard headstones",
+        "cold mist swallows the streetlamps as hollow footsteps draw nearer",
+        "ancient whispers echo from the darkened attic at the stroke of midnight",
+        "the lantern flickered out just as pale hands reached through the fog",
+        "cursed echoes linger inside the ruined hospital corridor after dark",
+        "never look away when the closest silhouette steps out of the gloom",
+        "the heavy iron gate groaned open beneath the howling winter wind",
+        "trembling fingers reload the last flare while the undead close in",
+        "broken glass crunches loudly along the deserted midnight highway",
+        "the necromancer summoned a relentless swarm from the sunken crypt",
+    ],
+    "CODER": [
+        "git commit your clean changes before the midnight deployment begins",
+        "every failing unit test reveals an edge case waiting to be fixed",
+        "refactor duplicated logic into a single well tested helper function",
+        "async workers process incoming events without blocking the main loop",
+        "never trust unvalidated user input anywhere near a system boundary",
+        "clean architecture keeps simulation logic separate from terminal rendering",
+        "binary search cuts the lookup time down to logarithmic complexity",
+        "encrypted packets travel safely across the distributed server cluster",
+        "check the stack trace carefully before restarting the production daemon",
+        "strong typing catches subtle bugs long before the code ships to users",
+        "automated pipelines build wheels and run tests on every pull request",
+        "immutable snapshots make state serialization and debugging effortless",
+    ],
+}
+SENTENCES["MIXED"] = SENTENCES["EVERYDAY"] + SENTENCES["HORROR"] + SENTENCES["CODER"]
+
+
+def sentence_cfg(wave=1):
+    """Return configuration dict for Sentence Siege wave n."""
+    return dict(
+        name=f"SENTENCE WAVE {wave}",
+        quota=min(14, 5 + wave * 2),
+        speed=min(4.2, 1.8 + 0.28 * wave),
+        spawn=max(2.6, 5.2 - 0.3 * wave),
+        lens=(6, 14),
+        kinds={"S": 1},
+        events=["supply", "fog"] if wave >= 2 else ["supply"],
+        boss=(wave % 2 == 0),
+        blurb="Type full sentences word by word. Perfect sentences earn bonus charges!",
+    )
+
+
+class SentenceSiege(Siege):
+    """Big-sentence typing mode with word-streak multipliers and WPM bonuses."""
+
+    def __init__(self, cfg, label, settings, tier=1, seed=None, mutators=None):
+        super().__init__(cfg, label, settings, tier=tier, seed=seed, mutators=mutators)
+        self.word_streak = 0
+        self.best_word_streak = 0
+        self.perfect_sentences = 0
+        self.sentences_cleared = 0
+        self.peak_wpm = 0.0
+        self._sentence_typos = 0
+        self._word_had_typo = False
+
+    def pick_sentence(self, boss=False):
+        pool = SENTENCES[self.pack_name]
+        used = {z.word for z in self.zombies}
+        avail = [s for s in pool if s not in used] or pool
+        if boss:
+            s1 = self.rng.choice(avail)
+            rest = [s for s in avail if s != s1] or avail
+            s2 = self.rng.choice(rest)
+            return f"{s1} {s2}"
+        # Prefer shorter sentences on early tiers, longer on later tiers
+        ordered = sorted(avail, key=len)
+        if self.tier <= 2:
+            subset = ordered[: max(4, len(ordered) // 2)]
+        elif self.tier >= 5:
+            subset = ordered[len(ordered) // 3:]
+        else:
+            subset = ordered
+        return self.rng.choice(subset)
+
+    def add(self, kind, lane, word=None):
+        is_boss = kind == "K"
+        actual_kind = "K" if is_boss else "S"
+        if word is None:
+            word = self.pick_sentence(boss=is_boss)
+        speed = self.cfg["speed"] * KINDS[actual_kind]["speed"] * self.dspeed
+        z = Zombie(actual_kind, word, lane, speed)
+        z.x = float(FIELD_W - 4 if not is_boss else FIELD_W - 8)
+        self.zombies.append(z)
+        return z
+
+    def _typo(self):
+        super()._typo()
+        self._sentence_typos += 1
+        self._word_had_typo = True
+        self.word_streak = 0
+
+    def type_char(self, ch):
+        if self.t < self.jam_until:
+            return "jam"
+        z = self.target
+        if z is not None and z not in self.zombies:
+            z = self.target = None
+        if z is None:
+            if ch == " ":
+                return "none"
+            cands = [q for q in self.zombies if q.word[0] == ch]
+            if not cands:
+                self._typo()
+                return "miss"
+            z = self.target = min(cands, key=lambda q: q.x)
+            self._sentence_typos = 0
+            self._word_had_typo = False
+        if z.word[z.typed] != ch:
+            self._typo()
+            return "miss"
+
+        z.typed += 1
+        self.correct += 1
+        self.stamps.append(self.t)
+        if self.t - self._last_char < 2.0:
+            self.active_time += self.t - self._last_char
+        self._last_char = self.t
+        self.peak_wpm = max(self.peak_wpm, self.wpm())
+        self.effects.append(("tracer", z.lane, z.x, self.t + 0.1))
+
+        if ch == " ":
+            if not self._word_had_typo:
+                self.word_streak += 1
+                self.best_word_streak = max(self.best_word_streak, self.word_streak)
+                self.score += 15 + min(self.word_streak, 15) * 3
+            self._word_had_typo = False
+
+        if z.typed >= len(z.word):
+            if not self._word_had_typo:
+                self.word_streak += 1
+                self.best_word_streak = max(self.best_word_streak, self.word_streak)
+            self._kill(z)
+            return "kill"
+        self._emit_sound("hit")
+        return "hit"
+
+    def _kill(self, z, bomb=False):
+        if z in self.zombies:
+            self.zombies.remove(z)
+        if self.target is z:
+            self.target = None
+        self.kills += 1
+        if bomb:
+            self.score += int(len(z.word) * 4 * self.score_mult)
+            self.effects.append(("pop", z.lane, z.x, self.t + 0.35))
+            return
+
+        self.sentences_cleared += 1
+        self.combo += 1
+        self.best_combo = max(self.best_combo, self.combo)
+        streak_mult = 1.0 + min(self.word_streak, 20) * 0.05
+        char_count = len(z.word.replace(" ", ""))
+        wpm_bonus = int(self.wpm() * 3)
+        perfect = self._sentence_typos == 0
+        perfect_bonus = 250 if perfect else 0
+        base = char_count * 12 * (1.5 if z.kind == "K" else 1.0)
+        pts = int((base * streak_mult + wpm_bonus + perfect_bonus) * self.score_mult)
+        self.score += pts
+        self.effects.append(("pop", z.lane, z.x, self.t + 0.35))
+
+        if perfect:
+            self.perfect_sentences += 1
+        msg = f"+{pts}  {'PERFECT! ' if perfect else ''}({len(z.word.split())} words)"
+        if perfect and self.perfect_sentences % 3 == 0 and "pure_typing" not in self.mutators:
+            bonus_power = self.rng.choice(POWERS)
+            self.charges[bonus_power] = min(3, self.charges[bonus_power] + 1)
+            msg += f"  +1 {bonus_power.upper()}"
+        if z.kind == "K":
+            self.bosses_slain += 1
+            msg = f"BOSS PARAGRAPH CLEARED! +{pts}"
+            self._emit_sound("clear")
+        else:
+            self._emit_sound("kill")
+        self._sentence_typos = 0
+        self._word_had_typo = False
+        self.say(msg, GREEN)
+

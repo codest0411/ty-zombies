@@ -24,9 +24,10 @@ A fast, tactical terminal typing survival game with an 8-level Campaign, Endless
 
 - 🎯 **Lock-On Typing**: No Enter key required—type the first letter of any word to lock onto the closest matching zombie, then finish the word to shoot.
 - 🧟 **7 Zombie Types**: Walkers `[Z]`, fast Runners `[R]`, heavy Brutes `[B]`, Medics `[+]`, Frost `[*]`, Bombers `[X]`, and sentence-carrying Bosses `[BOSS]`.
-- 🗺️ **4 Game Modes**:
+- 🗺️ **5 Game Modes**:
   - **Campaign**: 8 escalating levels with 3-star ratings and unlockable Level Select.
   - **Endless Survival**: Infinite waves with a Boss every 3rd wave.
+  - **Sentence Siege (v2.0)**: Type full, multi-word sentences and Boss Paragraphs with Word Streak multipliers, Perfect Sentence bonuses (`+250` pts & bonus charges), and a wrapped active-sentence cockpit (`--mode sentence`).
   - **Daily Challenge**: Deterministic daily seeded run (`--mode daily`) with daily tracking.
   - **Sandbox & Mutators**: Shareable seeds (`--seed`) + 4 toggleable mutators (`Hyper Horde`, `Glass Barricade`, `Dense Mist`, `Pure Typing`).
 - 🔥 **Combo Fever**: Maintain a 10x+ combo for a **+25% score multiplier**.
@@ -82,6 +83,7 @@ python -m tyzombie
 # Jump directly into a mode
 tyzombie --mode campaign
 tyzombie --mode survival
+tyzombie --mode sentence
 tyzombie --mode daily
 tyzombie --mode sandbox --seed 4242
 

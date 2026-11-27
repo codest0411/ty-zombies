@@ -8,7 +8,7 @@ import wave
 from tyzombie import __version__
 from tyzombie.audio import AudioEngine, _synthesize_wav
 from tyzombie.cli import main as cli_main
-from tyzombie.models import LEVELS, Siege
+from tyzombie.models import LEVELS, SentenceSiege, Siege, sentence_cfg
 from tyzombie.save import DEFAULT_SETTINGS, SaveManager
 from tyzombie.ui import (
     BufferCanvas,
@@ -118,6 +118,19 @@ def test_ui_screens_render_without_error(tmp_path):
     cv.clear()
     draw_sandbox(cv, "42", ["hyper_horde"], 0)
     assert "SANDBOX" in cv.full_text()
+
+    # Sentence Siege wrapped cockpit & telemetry
+    scv = BufferCanvas(rows=26, cols=104)
+    ssh = SentenceSiege(sentence_cfg(1), "SENTENCE", DEFAULT_SETTINGS, tier=1, seed=3)
+    sz = ssh.add("S", 1, word="git commit your clean changes before the midnight deployment begins")
+    ssh.type_char("g")
+    ssh.type_char("i")
+    ssh.type_char("t")
+    draw_siege(scv, ssh)
+    stext = scv.full_text()
+    assert "STRK" in stext
+    assert "PERF" in stext
+    assert sz.word[:20] in stext or "commit" in stext
 
 
 def test_audio_wav_synthesis_and_engine(tmp_path):

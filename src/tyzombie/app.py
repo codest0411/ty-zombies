@@ -12,8 +12,10 @@ from tyzombie.models import (
     LEVELS,
     MUTATORS,
     PACK_NAMES,
+    SentenceSiege,
     Siege,
     daily_cfg,
+    sentence_cfg,
     survival_cfg,
 )
 from tyzombie.save import ACHIEVEMENTS, SaveManager
@@ -405,6 +407,46 @@ class App:
             )
             wave += 1
 
+    def sentence_siege(self, start_wave=1, total=0):
+        wave = start_wave
+        while True:
+            cfg = sentence_cfg(wave)
+            self.briefing("SENTENCE SIEGE", cfg)
+            sh = SentenceSiege(cfg, "SENTENCE", self.data["settings"], tier=wave)
+            sh.name = f"WAVE {wave}"
+            result = self.run_level(sh, mode="SENTENCE", stage=wave, total=total)
+            if result == "quit":
+                return
+            if result == "dead":
+                self.audio.play("gameover")
+                total += sh.score
+                self.show_debrief(
+                    "SENTENCE SIEGE ENDED",
+                    RED,
+                    [
+                        f"Reached Wave {wave}   Sentences cleared: {sh.sentences_cleared}",
+                        f"Peak WPM {sh.peak_wpm:.0f}   Best Word Streak x{sh.best_word_streak}",
+                        f"Perfect Sentences: {sh.perfect_sentences}   Accuracy: {sh.accuracy():.0f}%",
+                        (f"Final Score: {total}", YELLOW, True),
+                    ],
+                )
+                self.finish(total, f"Sentence W{wave}", "SENTENCE", sh)
+                return
+            self.audio.play("clear")
+            total, info, newly = self.level_cleared(sh, total, mode="SENTENCE", wave=wave)
+            self.save_mgr.clear_active_run()
+            self.show_debrief(
+                f"SENTENCE WAVE {wave} CLEARED",
+                GREEN,
+                [
+                    f"Speed {info['wpm']:.0f} WPM (Peak {sh.peak_wpm:.0f})   Accuracy {info['acc']:.0f}%",
+                    f"Word Streak x{sh.best_word_streak}   Perfect Sentences: {sh.perfect_sentences}",
+                    (f"Score so far: {total}", YELLOW, True),
+                ],
+                newly_unlocked=newly,
+            )
+            wave += 1
+
     def daily_challenge(self):
         day = datetime.date.today().isoformat()
         cfg, seed, pack_idx, muts = daily_cfg(day)
@@ -521,6 +563,9 @@ class App:
             if self.start_mode == "survival":
                 self.survival()
                 return
+            if self.start_mode == "sentence":
+                self.sentence_siege()
+                return
             if self.start_mode == "daily":
                 self.daily_challenge()
                 return
@@ -537,6 +582,7 @@ class App:
                 items = (["RESUME RUN"] if has_resume else []) + [
                     "CAMPAIGN",
                     "SURVIVAL",
+                    "SENTENCE SIEGE",
                     "DAILY CHALLENGE",
                     "SANDBOX & MUTATORS",
                     "LEVEL SELECT",
@@ -556,6 +602,8 @@ class App:
                     self.campaign(0)
                 elif choice == "SURVIVAL":
                     self.survival()
+                elif choice == "SENTENCE SIEGE":
+                    self.sentence_siege()
                 elif choice == "DAILY CHALLENGE":
                     self.daily_challenge()
                 elif choice == "SANDBOX & MUTATORS":

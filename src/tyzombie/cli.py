@@ -69,7 +69,7 @@ def build_parser():
     )
     parser.add_argument(
         "--mode",
-        choices=["campaign", "survival", "daily", "sandbox"],
+        choices=["campaign", "survival", "sentence", "daily", "sandbox"],
         default=None,
         help="Jump directly into a specific game mode.",
     )

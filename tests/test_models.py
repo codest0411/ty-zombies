@@ -3,10 +3,12 @@
 from tyzombie.models import (
     DIFFS,
     LEVELS,
+    SentenceSiege,
     Siege,
     Zombie,
     daily_cfg,
     seed_to_int,
+    sentence_cfg,
     survival_cfg,
 )
 from tyzombie.save import DEFAULT_SETTINGS
@@ -130,3 +132,21 @@ def test_summary_stars_and_serialization():
     assert len(sh2.zombies) == 1
     assert sh2.zombies[0].word == "zombie"
     assert sh2.correct == 100
+
+
+def test_sentence_siege_word_streak_and_perfect_bonus():
+    cfg = sentence_cfg(1)
+    sh = SentenceSiege(cfg, "SENTENCE", make_settings(difficulty=1), tier=1, seed=11)
+    sh.charges = {"freeze": 0, "bomb": 0, "repair": 0}
+    for i in range(3):
+        sentence = f"hold fast lane {i}"
+        sh.add("S", i, word=sentence)
+        res = None
+        for ch in sentence:
+            res = sh.type_char(ch)
+        assert res == "kill"
+    assert sh.sentences_cleared == 3
+    assert sh.perfect_sentences == 3
+    assert sh.best_word_streak >= 12
+    assert sum(sh.charges.values()) == 1  # bonus charge on 3rd perfect sentence
+    assert sh.score > 500

@@ -34,6 +34,7 @@ DEFAULT_STATS = {
     "best_combo": 0,
     "best_wpm": 0,
     "best_wave": 0,
+    "sentences_cleared": 0,
     "daily_completed": [],
 }
 
@@ -41,6 +42,7 @@ ACHIEVEMENTS = [
     ("first_blood", "First Blood", "Kill your first zombie."),
     ("untouchable", "Untouchable", "Earn 3 stars on any campaign level."),
     ("speed_demon", "Speed Demon", "Reach 70+ WPM in a completed level or wave."),
+    ("speed_90", "Supersonic Typist", "Reach 90+ WPM in any completed level or wave."),
     ("combo_master", "Combo Master", "Reach a 25x typing combo."),
     ("boss_slayer", "Boss Slayer", "Defeat a sentence-carrying Boss."),
     ("survivor_5", "Wave Rider", "Survive to Wave 5 in Survival mode."),
@@ -48,6 +50,8 @@ ACHIEVEMENTS = [
     ("sharpshooter", "Sharpshooter", "Finish a level with 98%+ accuracy."),
     ("pyromaniac", "Pyromaniac", "Detonate 10 Bomb power-ups."),
     ("daily_contender", "Daily Contender", "Complete a Daily Challenge run."),
+    ("sentence_master", "Sentence Master", "Clear 10 sentences in Sentence Siege."),
+    ("flawless_prose", "Flawless Prose", "Clear a Sentence Siege wave with 100% accuracy."),
 ]
 
 DEFAULT_DATA: dict[str, Any] = {
@@ -189,18 +193,24 @@ class SaveManager:
         self.data["best_wpm"] = max(self.data["best_wpm"], rounded_wpm)
         if wave > 0:
             st["best_wave"] = max(st["best_wave"], wave)
+        sentences_cleared = getattr(siege, "sentences_cleared", 0)
+        if sentences_cleared:
+            st["sentences_cleared"] = st.get("sentences_cleared", 0) + sentences_cleared
 
         newly_unlocked = []
         checks = [
             ("first_blood", st["total_kills"] >= 1),
             ("untouchable", info.get("stars", 0) == 3),
             ("speed_demon", info.get("wpm", 0) >= 70),
+            ("speed_90", info.get("wpm", 0) >= 90),
             ("combo_master", siege.best_combo >= 25),
             ("boss_slayer", st["bosses_slain"] >= 1),
             ("survivor_5", wave >= 5),
             ("sharpshooter", info.get("acc", 0) >= 98 and siege.kills > 0),
             ("pyromaniac", st["bombs_used"] >= 10),
             ("daily_contender", mode == "DAILY"),
+            ("sentence_master", st.get("sentences_cleared", 0) >= 10),
+            ("flawless_prose", mode == "SENTENCE" and info.get("acc", 0) >= 100 and siege.kills > 0),
         ]
         for ach_id, cond in checks:
             if cond and self.unlock_achievement(ach_id):

@@ -186,6 +186,20 @@ def draw_zombie(cv, y, z, sh):
     x = col0 + len(k["sprite"]) + 1
     is_target = z is sh.target
     word = z.word
+    if len(word) > 26:
+        # Compact preview on the lane; full sentence renders in the lower cockpit
+        rem = word[z.typed:]
+        preview = (rem[:20] + "...") if len(rem) > 23 else rem
+        if sh.fog_active() and not is_target and z.x > 22:
+            preview = word[0] + "?" * min(12, len(word) - 1)
+        base = RED if danger else WHITE
+        if preview:
+            if is_target:
+                cv.put(y, x, preview[0], YELLOW, bold=True, rev=True)
+                cv.put(y, x + 1, preview[1:], base)
+            else:
+                cv.put(y, x, preview, base, bold=True)
+        return
     if sh.fog_active() and not is_target and z.x > 22:
         word = word[0] + "?" * (len(word) - 1)
     base = RED if danger else WHITE
@@ -278,7 +292,9 @@ def draw_siege(cv, sh, paused=False, reduced_flash=False, large_ui=False):
             cv.put(7, sx + 2, f"PACK: {sh.pack_name}"[: sw - 4], WHITE)
             mut_str = ", ".join(sh.mutators) if sh.mutators else "none"
             cv.put(8, sx + 2, f"MUT: {mut_str}"[: sw - 4], MAGENTA if sh.mutators else WHITE, dim=not sh.mutators)
-            if sh.combo >= 10:
+            if hasattr(sh, "word_streak"):
+                cv.put(9, sx + 2, f"STRK x{sh.word_streak}  PERF {sh.perfect_sentences}"[: sw - 4], GREEN)
+            elif sh.combo >= 10:
                 cv.put(10, sx + 2, "FEVER +25% PTS!", YELLOW, bold=True)
             else:
                 cv.put(10, sx + 2, f"FEVER AT x10 ({sh.combo}/10)"[: sw - 4], dim=True)
@@ -290,6 +306,24 @@ def draw_siege(cv, sh, paused=False, reduced_flash=False, large_ui=False):
     t = sh.target
     if t is None:
         cv.put(y + 1, 7, "(none)  type the first letter of any word", dim=True)
+    elif len(t.word) > max(32, w - 22):
+        # Wrapped multi-line sentence display
+        max_line = max(30, w - 10)
+        idx = 0
+        row_off = 0
+        while idx < len(t.word) and y + 1 + row_off < h - 3:
+            chunk = t.word[idx: idx + max_line]
+            for ci, ch in enumerate(chunk):
+                g_idx = idx + ci
+                if g_idx < t.typed:
+                    cv.put(y + 1 + row_off, 7 + ci, ch, GREEN, bold=True)
+                elif g_idx == t.typed:
+                    cv.put(y + 1 + row_off, 7 + ci, ch, YELLOW, bold=True, rev=True)
+                else:
+                    cv.put(y + 1 + row_off, 7 + ci, ch, WHITE)
+            idx += max_line
+            row_off += 1
+        y += max(0, row_off - 1)
     else:
         label = KINDS[t.kind]["label"]
         cv.put(y + 1, 7, t.word[: t.typed], GREEN, bold=True)
