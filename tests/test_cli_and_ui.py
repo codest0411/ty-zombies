@@ -131,6 +131,12 @@ def test_ui_screens_render_without_error(tmp_path):
     assert "STRK" in stext
     assert "PERF" in stext
     assert sz.word[:20] in stext or "commit" in stext
+    assert "SPACE>" in stext
+
+    # Sentence Siege visible in compact 80x24 menu
+    mcv = BufferCanvas(rows=24, cols=80)
+    draw_menu(mcv, ["CAMPAIGN", "SURVIVAL", "SENTENCE SIEGE", "DAILY CHALLENGE", "QUIT"], 2)
+    assert "SENTENCE SIEGE" in mcv.full_text()
 
 
 def test_audio_wav_synthesis_and_engine(tmp_path):

@@ -150,3 +150,13 @@ def test_sentence_siege_word_streak_and_perfect_bonus():
     assert sh.best_word_streak >= 12
     assert sum(sh.charges.values()) == 1  # bonus charge on 3rd perfect sentence
     assert sh.score > 500
+
+
+def test_no_repeated_words_or_sentences_until_exhausted():
+    sh = Siege(LEVELS[0], "LEVEL 1", make_settings(), tier=1, seed=101)
+    picked = [sh.pick_word(3, 3) for _ in range(8)]
+    assert len(set(picked)) == len(picked)
+
+    ssh = SentenceSiege(sentence_cfg(1), "SENTENCE", make_settings(), tier=1, seed=202)
+    sentences = [ssh.pick_sentence() for _ in range(4)]
+    assert len(set(sentences)) == len(sentences)

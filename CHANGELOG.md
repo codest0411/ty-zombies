@@ -5,6 +5,13 @@ All notable changes to **ty-zombies** will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - 2026-11-27
+
+### Added
+- **Non-Repeating Words & Sentences**: Completed/spawned words and sentences are tracked in `seen_words` / `seen_sentences` so they never repeat during a run until the entire pool is exhausted.
+- **Scrollable Main Menu**: `draw_menu` now scrolls smoothly so `SENTENCE SIEGE` and all modes are always visible and selectable even on compact `80x24` terminals.
+- **Visible Space Cue in Sentence Siege**: When the next character to type in a sentence is a space (`" "`), the `TARGET` console highlights `_` and shows `SPACE>` so multi-word typing (`how are u`) is unmistakable.
+
 ## [2.0.0] - 2026-11-27
 
 ### Added

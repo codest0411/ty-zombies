@@ -148,8 +148,11 @@ def draw_menu(cv, items, sel, footer="UP/DOWN move   ENTER select   Q quit", sub
         center(cv, 5, stat_line, CYAN, dim=True)
     top = 7
     step = 2 if h >= 26 and len(items) <= 8 else 1
-    for i, text in enumerate(items):
-        row = top + i * step
+    max_visible = max(1, (h - 2 - top + step - 1) // step)
+    start_idx = max(0, min(sel - max_visible // 2, len(items) - max_visible))
+    for offset, i in enumerate(range(start_idx, min(len(items), start_idx + max_visible))):
+        text = items[i]
+        row = top + offset * step
         if row >= h - 2:
             break
         if i == sel:
@@ -308,6 +311,8 @@ def draw_siege(cv, sh, paused=False, reduced_flash=False, large_ui=False):
         cv.put(y + 1, 7, "(none)  type the first letter of any word", dim=True)
     elif len(t.word) > max(32, w - 22):
         # Wrapped multi-line sentence display
+        if t.typed < len(t.word) and t.word[t.typed] == " ":
+            cv.put(y + 1, 0, "SPACE> ", YELLOW, bold=True)
         max_line = max(30, w - 10)
         idx = 0
         row_off = 0
@@ -318,7 +323,8 @@ def draw_siege(cv, sh, paused=False, reduced_flash=False, large_ui=False):
                 if g_idx < t.typed:
                     cv.put(y + 1 + row_off, 7 + ci, ch, GREEN, bold=True)
                 elif g_idx == t.typed:
-                    cv.put(y + 1 + row_off, 7 + ci, ch, YELLOW, bold=True, rev=True)
+                    disp = "_" if ch == " " else ch
+                    cv.put(y + 1 + row_off, 7 + ci, disp, YELLOW, bold=True, rev=True)
                 else:
                     cv.put(y + 1 + row_off, 7 + ci, ch, WHITE)
             idx += max_line
@@ -326,8 +332,14 @@ def draw_siege(cv, sh, paused=False, reduced_flash=False, large_ui=False):
         y += max(0, row_off - 1)
     else:
         label = KINDS[t.kind]["label"]
+        if t.typed < len(t.word) and t.word[t.typed] == " ":
+            cv.put(y + 1, 0, "SPACE> ", YELLOW, bold=True)
         cv.put(y + 1, 7, t.word[: t.typed], GREEN, bold=True)
-        cv.put(y + 1, 7 + t.typed, t.word[t.typed:], YELLOW, bold=True)
+        if t.typed < len(t.word):
+            nxt = "_" if t.word[t.typed] == " " else t.word[t.typed]
+            cv.put(y + 1, 7 + t.typed, nxt, YELLOW, bold=True, rev=True)
+            if t.typed + 1 < len(t.word):
+                cv.put(y + 1, 7 + t.typed + 1, t.word[t.typed + 1:], WHITE)
         cv.put(y + 1, 7 + len(t.word) + 3, f"({label})", dim=True)
 
     status = []

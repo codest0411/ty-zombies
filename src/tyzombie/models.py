@@ -243,6 +243,7 @@ class Siege:
         self.hp = self.max_hp
         self.t = 0.0
         self.zombies = []
+        self.seen_words = set()
         self.effects = []
         self.stamps = []
         self.target = None
@@ -306,11 +307,20 @@ class Siege:
         if not lens:
             lens = [min(self.bucket, key=lambda n: abs(n - lo))]
         pool = [w for n in lens for w in self.bucket[n]]
-        used = {z.word for z in self.zombies}
+        used = {z.word for z in self.zombies} | self.seen_words
         firsts = {z.word[0] for z in self.zombies}
         fresh = [w for w in pool if w not in used and w[0] not in firsts]
-        pool = fresh or [w for w in pool if w not in used] or pool
-        return self.rng.choice(pool)
+        unseen = [w for w in pool if w not in used]
+        if not fresh and not unseen:
+            # All words in this length range were used; reset history except active zombies
+            self.seen_words.clear()
+            used = {z.word for z in self.zombies}
+            fresh = [w for w in pool if w not in used and w[0] not in firsts]
+            unseen = [w for w in pool if w not in used]
+        choice_pool = fresh or unseen or [w for w in pool if w not in {z.word for z in self.zombies}] or pool
+        picked = self.rng.choice(choice_pool)
+        self.seen_words.add(picked)
+        return picked
 
     def boss_phrase(self):
         n = 3 + (self.tier >= 5) + (self.tier >= 7)
@@ -728,15 +738,21 @@ class SentenceSiege(Siege):
         self.peak_wpm = 0.0
         self._sentence_typos = 0
         self._word_had_typo = False
+        self.seen_sentences = set()
 
     def pick_sentence(self, boss=False):
         pool = SENTENCES[self.pack_name]
-        used = {z.word for z in self.zombies}
-        avail = [s for s in pool if s not in used] or pool
+        active = {z.word for z in self.zombies}
+        avail = [s for s in pool if s not in active and s not in self.seen_sentences]
+        if not avail:
+            self.seen_sentences.clear()
+            avail = [s for s in pool if s not in active] or pool
         if boss:
             s1 = self.rng.choice(avail)
             rest = [s for s in avail if s != s1] or avail
             s2 = self.rng.choice(rest)
+            self.seen_sentences.add(s1)
+            self.seen_sentences.add(s2)
             return f"{s1} {s2}"
         # Prefer shorter sentences on early tiers, longer on later tiers
         ordered = sorted(avail, key=len)
@@ -746,7 +762,9 @@ class SentenceSiege(Siege):
             subset = ordered[len(ordered) // 3:]
         else:
             subset = ordered
-        return self.rng.choice(subset)
+        picked = self.rng.choice(subset)
+        self.seen_sentences.add(picked)
+        return picked
 
     def add(self, kind, lane, word=None):
         is_boss = kind == "K"

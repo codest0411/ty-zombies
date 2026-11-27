@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ty-zombies"
-version = "2.0.0"
+version = "3.0.0"
 description = "A fast, tactical terminal typing survival game with campaign levels, bosses, mutators, daily challenges, and endless waves."
 readme = "README.md"
 license = {text = "MIT"}
