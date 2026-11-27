@@ -1,5 +1,7 @@
 """Zero-dependency cross-platform synthesized audio engine."""
 
+from __future__ import annotations
+
 import math
 import os
 import queue
@@ -52,16 +54,16 @@ class AudioEngine:
 
     def __init__(self, enabled=True):
         self.enabled = bool(enabled)
-        self._queue = queue.Queue(maxsize=16)
+        self._queue: queue.Queue[str | None] = queue.Queue(maxsize=16)
         self._stop = threading.Event()
-        self._cache = {}
-        self._tmpdir = None
-        self._unix_player = self._detect_unix_player()
+        self._cache: dict[str, str] = {}
+        self._tmpdir: str | None = None
+        self._unix_player: str | None = self._detect_unix_player()
         self._worker = threading.Thread(target=self._run, name="tyzombie-audio", daemon=True)
         self._worker.start()
 
     @staticmethod
-    def _detect_unix_player():
+    def _detect_unix_player() -> str | None:
         if sys.platform == "darwin":
             return shutil.which("afplay")
         if sys.platform.startswith("linux"):
@@ -120,12 +122,15 @@ class AudioEngine:
                 for freq, dur in tones:
                     if not self.enabled or self._stop.is_set():
                         break
-                    winsound.Beep(max(37, min(32767, int(freq))), max(10, int(dur)))
+                    winsound.Beep(max(37, min(32767, freq)), max(10, dur))
             except Exception:
                 pass
             return
 
-        if not self._unix_player:
+        player = self._unix_player
+        if not isinstance(player, str):
+            return
+        if not player:
             return
         try:
             if cue not in self._cache:
@@ -134,8 +139,10 @@ class AudioEngine:
                 wav_path = os.path.join(self._tmpdir, f"{cue}.wav")
                 _synthesize_wav(wav_path, tones)
                 self._cache[cue] = wav_path
+            # pyrefly: ignore[bad-assignment]
+            cmd: list[str] = [player, self._cache[cue]]
             subprocess.run(
-                [self._unix_player, self._cache[cue]],
+                cmd,
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
                 timeout=3,

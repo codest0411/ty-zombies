@@ -1,11 +1,14 @@
 """Color themes, accessibility palettes, and box-drawing glyphs."""
 
+from __future__ import annotations
+
 import sys
+from typing import Any
 
 # Color pair IDs used across canvases
 GREEN, YELLOW, RED, CYAN, BLUE, WHITE, MAGENTA = 1, 2, 3, 4, 5, 6, 7
 
-THEMES = [
+THEMES: list[dict[str, Any]] = [
     {
         "id": "outbreak",
         "name": "OUTBREAK",

@@ -8,6 +8,7 @@ import time
 from tyzombie.audio import AudioEngine
 from tyzombie.models import (
     DIFFS,
+    KINDS,
     LEVELS,
     MUTATORS,
     PACK_NAMES,
@@ -298,6 +299,7 @@ class App:
 
     def campaign(self, start=0, total=0, resume_siege=None):
         idx = start
+        sh = None
         while idx < len(LEVELS):
             cfg = LEVELS[idx]
             if resume_siege is not None:
@@ -358,7 +360,8 @@ class App:
             ],
             newly_unlocked=["apocalypse"],
         )
-        self.finish(total, "Victory", "CAMPAIGN", sh)
+        if sh is not None:
+            self.finish(total, "Victory", "CAMPAIGN", sh)
 
     def survival(self, start_wave=1, total=0, resume_siege=None):
         wave = start_wave

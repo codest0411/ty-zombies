@@ -1,9 +1,12 @@
 """Persistent save management, stats, achievements, mid-run resume, and run cards."""
 
+from __future__ import annotations
+
 import copy
 import datetime
 import json
 import os
+from typing import Any
 
 DATA_DIR_ENV = "TYZOMBIE_DATA_DIR"
 
@@ -47,7 +50,7 @@ ACHIEVEMENTS = [
     ("daily_contender", "Daily Contender", "Complete a Daily Challenge run."),
 ]
 
-DEFAULT_DATA = {
+DEFAULT_DATA: dict[str, Any] = {
     "version": 2,
     "settings": DEFAULT_SETTINGS,
     "unlocked": 1,
@@ -104,7 +107,7 @@ class SaveManager:
             if isinstance(raw.get("scores"), list):
                 valid_scores = [e for e in raw["scores"] if isinstance(e, dict) and "score" in e]
                 d["scores"] = sorted(valid_scores, key=lambda e: -int(e.get("score", 0)))[:10]
-            d["best_wpm"] = max(0, int(round(float(raw.get("best_wpm", 0)))))
+            d["best_wpm"] = max(0, round(float(raw.get("best_wpm", 0))))
             if isinstance(raw.get("stats"), dict):
                 for k in d["stats"]:
                     if k in raw["stats"]:
